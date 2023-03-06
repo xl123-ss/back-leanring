@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="com.xxx.spring.ioc.UserDaoImpl"></bean>
+    <bean id="userService" class="com.xxx.spring.ioc.UserServiceImpl">
+        <!--set方法注入-->
+<!--        <property name="userDao" ref="userDao"></property>-->
+<!--        <property name="namea" value="张三"></property>-->
+        <constructor-arg index="0" ref="userDao"></constructor-arg>
+        <constructor-arg index="1" value="张三"></constructor-arg>
+    </bean>
+
+    <bean id="cat" class="com.xxx.spring.ioc.t01entity.Cat" p:age="10" p:name="小猫"></bean>
+    <bean id="dog" class="com.xxx.spring.ioc.t01entity.Dog" p:age="20" p:name="小狗"></bean>
+
+    <bean id="book1" class="com.xxx.spring.ioc.t01entity.Book">
+        <constructor-arg value="1"></constructor-arg>
+<!--        <constructor-arg name="id"> </constructor-arg>-->
+        <constructor-arg value="钢铁是如何。。。"></constructor-arg>
+        <constructor-arg value="30"></constructor-arg>
+    </bean>
+
+    <bean id="book2" class="com.xxx.spring.ioc.t01entity.Book">
+        <property name="id" value="2"></property>
+        <property name="name" value="java基础"></property>
+        <property name="price" value="25"></property>
+    </bean>
+
+    <bean id="clothes1" class="com.xxx.spring.ioc.t01entity.Clothes"
+          p:style="连衣裙" p:color="红色"></bean>
+    <bean id="clothes2" class="com.xxx.spring.ioc.t01entity.Clothes"
+          p:style="小西装" p:color="蓝色"></bean>
+
+    <bean id="person1" class="com.xxx.spring.ioc.t01entity.Person"
+        p:name="女孩" p:clothes-ref="clothes1"></bean>
+    <bean id="person2" class="com.xxx.spring.ioc.t01entity.Person"
+          p:name="男孩" p:clothes-ref="clothes2"></bean>
+
+    <bean id="pen1" class="com.xxx.spring.ioc.t01entity.Pen" p:name="钢笔"></bean>
+    <bean id="pen2" class="com.xxx.spring.ioc.t01entity.Pen" p:name="铅笔"></bean>
+    <bean id="schoolbag" class="com.xxx.spring.ioc.t01entity.SchoolBag" p:color="褐色">
+        <property name="pens">
+            <list>
+                <ref bean="pen1"/>
+                <ref bean="pen2"/>
+            </list>
+        </property>
+        <property name="pens2">
+            <map>
+              <entry key="pen1" value-ref="pen1"></entry>
+              <entry key="pen2" value-ref="pen2"></entry>
+
+            </map>
+        </property>
+        <property name="pens3">
+            <list>
+                <map>
+                    <entry key="pen1" value-ref="pen1"></entry>
+                    <entry key="pen2" value-ref="pen2"></entry>
+
+                </map>
+            </list>
+
+        </property>
+    </bean>
+</beans>

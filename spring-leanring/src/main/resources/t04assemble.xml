@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    1.使用构造方法装配User实例-->
+    <bean id="user1" class="com.xxx.spring.ioc.t04assemble.User">
+        <constructor-arg value="tom"></constructor-arg>
+        <constructor-arg value="123456"></constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>constuctor value1</value>
+                <value>constuctor value2</value>
+            </list>
+        </constructor-arg>
+    </bean>
+<!--2.设置方法装配，User实例-->
+    <bean id="user2" class="com.xxx.spring.ioc.t04assemble.User" p:username="张三">
+        <property name="password" value="654321"></property>
+        <property name="list">
+            <list>
+                <value>setter value1</value>
+                <value>setter value2</value>
+            </list>
+        </property>
+    </bean>
+</beans>

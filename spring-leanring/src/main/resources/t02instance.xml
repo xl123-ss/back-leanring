@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="bean1" class="com.xxx.spring.ioc.t02instance.t01constructor.Bean1"></bean>
+    <bean id="bean2" class="com.xxx.spring.ioc.t02instance.t02static_factory.MyBean2Factory" factory-method="createBean2"></bean>
+    <bean id="factory" class="com.xxx.spring.ioc.t02instance.t03factory.MyBean3Factory"></bean>
+<!--   factory-bean指向工厂实例，并指定方法 -->
+    <bean id="bean3" factory-bean="factory"  factory-method="createBean3"></bean>
+</beans>
