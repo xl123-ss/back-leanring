@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 1.扫描Controller的包-->
+    <context:component-scan base-package="com.xxx"/>
+
+    <!-- 2.配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 2.1 页面前缀 -->
+        <property name="prefix" value="/pages/"/>
+        <!-- 2.2 页面后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 3.创建RequestMappingHandlerMapping对象-->
+    <!--在这里我们需要引入新建的转换器工厂，否则会使用默认工厂，不产生效果!!!!!-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!--静态资源处理-->
+    <mvc:default-servlet-handler/>
+    <!--静态资源处理-->
+<!--    <mvc:resources mapping="/img/**" location="/img/"/>-->
+<!--    <mvc:resources mapping="/css/**" location="/css/"/>-->
+<!--    <mvc:resources mapping="/js/**" location="/js/"/>-->
+
+    <!--4.配置自定义类型转换器-->
+    <!--4.1 创建类型转换器对象-->
+    <bean id="stringToDateConverter" class="com.xxx.controller.t02请求参数封封装.StringToDateConverter"/>
+    <bean id="stringToDateConverter2" class="com.xxx.controller.t02请求参数封封装.StringToDateConverter2"/>
+
+
+    <!--4.2 把新建的类型转换器对象加入到工厂中-->
+<!--    <bean id="conversionServiceCustomer" class="org.springframework.context.support.ConversionServiceFactoryBean">-->
+<!--        <property name="converters">-->
+<!--            <set>-->
+<!--                <ref bean="stringToDateConverter"/>-->
+<!--&lt;!&ndash;                <ref bean="stringToDateConverter2"/>&ndash;&gt;-->
+<!--            </set>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean  class="com.xxx.controller.t02请求参数封封装.StringToDateFormatter"/>
+            </set>
+        </property>
+    </bean>
+
+
+</beans>

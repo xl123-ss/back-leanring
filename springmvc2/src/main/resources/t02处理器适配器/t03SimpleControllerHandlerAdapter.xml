@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--1.创建BeanNameUrlHandlerMapping-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+    <!--2.创建SimpleControllerHandlerAdapter-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!--3.创建Controller对象，这里的id必须页面访问的路径（以斜杠开头）-->
+    <bean id="/hello" class="com.xxx.controller.t01基本使用.t02处理器适配器.T03SimpleControllerHandlerAdapter"/>
+
+</beans>
